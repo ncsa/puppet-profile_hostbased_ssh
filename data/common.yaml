@@ -1,0 +1,24 @@
+---
+
+profile_hostbased_ssh::known_hosts::ssh_known_hosts_file: "/etc/ssh/ssh_known_hosts"
+
+profile_hostbased_ssh::shosts_equiv::shosts_equiv_file: "/etc/ssh/shosts.equiv"
+
+profile_hostbased_ssh::source::global_custom_config:
+  EnableSSHKeysign: "yes"
+profile_hostbased_ssh::source::host_match_custom_config:
+  CheckHostIP: "no"
+  GlobalKnownHostsFile: "/etc/ssh/ssh_known_hosts"
+  HostbasedAuthentication: "yes"
+  NoHostAuthenticationForLocalhost: "yes"
+  StrictHostKeyChecking: "yes"
+  UserKnownHostsFile: "/dev/null"
+
+profile_hostbased_ssh::target::sshd_custom_config:
+  GSSAPIAuthentication: "no"
+  HostbasedAuthentication: "yes"
+  KerberosAuthentication: "no"
+  PasswordAuthentication: "no"
+  PubkeyAuthentication: "no"
+profile_hostbased_ssh::target::groups: []
+profile_hostbased_ssh::target::users: []

@@ -1,0 +1,34 @@
+---
+
+profile_hostbased_ssh::pam_slurm_adopt::pam_config:
+# exempt root from pam_slurm_adopt
+  'add account pam_succeed_if.so for privileged accounts to sshd':
+    arguments: ["uid", "=", "0"]
+    control: "sufficient"
+    ensure: "present"
+    module: "pam_succeed_if.so"
+    position: "after *[type=\"account\" and module=\"password-auth\"]"
+    service: "sshd"
+    type: "account"
+# use pam_slurm_adopt to only allow access to users with job allocations
+  'add account pam_slurm_adopt.so to sshd':
+    arguments: ["action_generic_failure=deny", "action_adopt_failure=deny"]
+    control: "required"
+    ensure: "present"
+    module: "pam_slurm_adopt.so"
+    position: "after *[type=\"account\" and module=\"pam_succeed_if.so\"]"
+    service: "sshd"
+    type: "account"
+# remove pam_systemd, which is incompatible with pam_slurm_adopt
+  'remove pam_systemd.so from password-auth':
+    ensure: "absent"
+    module: "pam_systemd.so"
+    service: "password-auth"
+    type: "session"
+  'remove pam_systemd.so from system-auth':
+    ensure: "absent"
+    module: "pam_systemd.so"
+    service: "system-auth"
+    type: "session"
+profile_hostbased_ssh::pam_slurm_adopt::services_to_mask:
+  - "systemd-logind.service"

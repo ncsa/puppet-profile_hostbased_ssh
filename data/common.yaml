@@ -15,6 +15,7 @@ profile_hostbased_ssh::source::host_match_custom_config:
   UserKnownHostsFile: "/dev/null"
 
 profile_hostbased_ssh::target::sshd_custom_config:
+  AuthenticationMethods: "hostbased"
   GSSAPIAuthentication: "no"
   HostbasedAuthentication: "yes"
   KerberosAuthentication: "no"

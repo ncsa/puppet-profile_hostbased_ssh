@@ -12,7 +12,8 @@
 #   Additional ssh_conf params (suitable for ssh_config match block)
 #
 # @param host_match_pattern
-#   Host pattern to match with 'Host' block
+#   Host pattern to match with 'Host' block. Use an empty string if
+#   this should be omitted for some reason.
 #
 # @example
 #   include profile_hostbased_ssh::source
@@ -40,32 +41,21 @@ class profile_hostbased_ssh::source (
     }
   }
 
-  $config_match_defaults = $config_defaults + { 'host' => $host_match_pattern }
+  if ! empty($host_match_pattern) {
 
-  # add host match block with custom config to ssh_config
-  $host_match_custom_config.each | $key, $val | {
-    ssh_config {
-      $key :
-        value => $val,
-      ;
-      default:
-        * => $config_match_defaults,
-      ;
+    $config_match_defaults = $config_defaults + { 'host' => $host_match_pattern }
+
+    # add host match block with custom config to ssh_config
+    $host_match_custom_config.each | $key, $val | {
+      ssh_config {
+        $key :
+          value => $val,
+        ;
+        default:
+          * => $config_match_defaults,
+        ;
+      }
     }
   }
-
-#  ssh_config { "test host val1":
-#    ensure => present,
-#    key    => "CheckHostIP",
-#    host   => "cn* gpu*",
-#    value  => "no",
-#  }
-
-#  ssh_config { "test host val2":
-#    ensure => present,
-#    key    => "HostbasedAuthentication",
-#    host   => "cn* gpu*",
-#    value  => "yes",
-#  }
 
 }

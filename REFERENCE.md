@@ -163,7 +163,8 @@ Additional ssh_conf params (suitable for ssh_config match block)
 
 Data type: `String`
 
-Host pattern to match with 'Host' block
+Host pattern to match with 'Host' block. Use an empty string if
+this should be omitted for some reason.
 
 ### <a name="profile_hostbased_sshtarget"></a>`profile_hostbased_ssh::target`
 

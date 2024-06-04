@@ -4,12 +4,14 @@
 # used in a standalone fashion (with proper Hiera data) but
 # intended to be used indirectly by including the target class.
 #
+# @param shosts_equiv_file
+#   Path to file that contains the shosts.equiv file on the target nodes
+#
 # @example
 #   include profile_hostbased_ssh::shosts_equiv
 class profile_hostbased_ssh::shosts_equiv (
   String $shosts_equiv_file,
 ) {
-
   # ensure proper perms on shosts.equiv file
   file { $shosts_equiv_file :
     ensure  => file,
@@ -18,5 +20,4 @@ class profile_hostbased_ssh::shosts_equiv (
     mode    => '0644',
     owner   => 'root',
   }
-
 }

@@ -6,15 +6,15 @@
 
 ### Classes
 
-* [`profile_hostbased_ssh::known_hosts`](#profile_hostbased_sshknown_hosts): Manage /etc/ssh/ssh_known_hosts for both source and target nodes in a hostbased authentication scenario.
-* [`profile_hostbased_ssh::pam_slurm_adopt`](#profile_hostbased_sshpam_slurm_adopt): Implement use of the pam_slurm_adopt module.
-* [`profile_hostbased_ssh::shosts_equiv`](#profile_hostbased_sshshosts_equiv): Manage the shosts.equiv file on the target nodes.
-* [`profile_hostbased_ssh::source`](#profile_hostbased_sshsource): Configure a source/client to use hostbased authentication.
-* [`profile_hostbased_ssh::target`](#profile_hostbased_sshtarget): Configure a target/server to accept hostbased authentication.
+* [`profile_hostbased_ssh::known_hosts`](#profile_hostbased_ssh--known_hosts): Manage /etc/ssh/ssh_known_hosts for both source and target nodes in a hostbased authentication scenario.
+* [`profile_hostbased_ssh::pam_slurm_adopt`](#profile_hostbased_ssh--pam_slurm_adopt): Implement use of the pam_slurm_adopt module.
+* [`profile_hostbased_ssh::shosts_equiv`](#profile_hostbased_ssh--shosts_equiv): Manage the shosts.equiv file on the target nodes.
+* [`profile_hostbased_ssh::source`](#profile_hostbased_ssh--source): Configure a source/client to use hostbased authentication.
+* [`profile_hostbased_ssh::target`](#profile_hostbased_ssh--target): Configure a target/server to accept hostbased authentication.
 
 ## Classes
 
-### <a name="profile_hostbased_sshknown_hosts"></a>`profile_hostbased_ssh::known_hosts`
+### <a name="profile_hostbased_ssh--known_hosts"></a>`profile_hostbased_ssh::known_hosts`
 
 Manage /etc/ssh/ssh_known_hosts for both source and target nodes in a hostbased authentication scenario.
 
@@ -26,10 +26,10 @@ This class is used by the target and source classes, but could also be used in a
 
 The following parameters are available in the `profile_hostbased_ssh::known_hosts` class:
 
-* [`hosts_data`](#hosts_data)
-* [`ssh_known_hosts_file`](#ssh_known_hosts_file)
+* [`hosts_data`](#-profile_hostbased_ssh--known_hosts--hosts_data)
+* [`ssh_known_hosts_file`](#-profile_hostbased_ssh--known_hosts--ssh_known_hosts_file)
 
-##### <a name="hosts_data"></a>`hosts_data`
+##### <a name="-profile_hostbased_ssh--known_hosts--hosts_data"></a>`hosts_data`
 
 Data type: `Hash`
 
@@ -49,13 +49,13 @@ Hash of the form:
       ...
   ...
 
-##### <a name="ssh_known_hosts_file"></a>`ssh_known_hosts_file`
+##### <a name="-profile_hostbased_ssh--known_hosts--ssh_known_hosts_file"></a>`ssh_known_hosts_file`
 
 Data type: `String`
 
 Location of the ssh_known_hosts file (usually /etc/ssh/ssh_known_hosts).
 
-### <a name="profile_hostbased_sshpam_slurm_adopt"></a>`profile_hostbased_ssh::pam_slurm_adopt`
+### <a name="profile_hostbased_ssh--pam_slurm_adopt"></a>`profile_hostbased_ssh::pam_slurm_adopt`
 
 Implement use of the pam_slurm_adopt module.
 
@@ -78,27 +78,22 @@ include profile_hostbased_ssh::pam_slurm_adopt
 
 The following parameters are available in the `profile_hostbased_ssh::pam_slurm_adopt` class:
 
-* [`pam_configs`](#pam_configs)
-* [`services_to_mask`](#services_to_mask)
-* [`pam_config`](#pam_config)
+* [`pam_config`](#-profile_hostbased_ssh--pam_slurm_adopt--pam_config)
+* [`services_to_mask`](#-profile_hostbased_ssh--pam_slurm_adopt--services_to_mask)
 
-##### <a name="pam_configs"></a>`pam_configs`
+##### <a name="-profile_hostbased_ssh--pam_slurm_adopt--pam_config"></a>`pam_config`
+
+Data type: `Hash`
 
 Hash of data to pass to augeasproviders_pam.
 
-##### <a name="services_to_mask"></a>`services_to_mask`
+##### <a name="-profile_hostbased_ssh--pam_slurm_adopt--services_to_mask"></a>`services_to_mask`
 
 Data type: `Array`
 
 Array of services to stop and mask
 
-##### <a name="pam_config"></a>`pam_config`
-
-Data type: `Hash`
-
-
-
-### <a name="profile_hostbased_sshshosts_equiv"></a>`profile_hostbased_ssh::shosts_equiv`
+### <a name="profile_hostbased_ssh--shosts_equiv"></a>`profile_hostbased_ssh::shosts_equiv`
 
 Manage the shosts.equiv file on the target nodes. Could be
 used in a standalone fashion (with proper Hiera data) but
@@ -116,15 +111,15 @@ include profile_hostbased_ssh::shosts_equiv
 
 The following parameters are available in the `profile_hostbased_ssh::shosts_equiv` class:
 
-* [`shosts_equiv_file`](#shosts_equiv_file)
+* [`shosts_equiv_file`](#-profile_hostbased_ssh--shosts_equiv--shosts_equiv_file)
 
-##### <a name="shosts_equiv_file"></a>`shosts_equiv_file`
+##### <a name="-profile_hostbased_ssh--shosts_equiv--shosts_equiv_file"></a>`shosts_equiv_file`
 
 Data type: `String`
 
+Path to file that contains the shosts.equiv file on the target nodes
 
-
-### <a name="profile_hostbased_sshsource"></a>`profile_hostbased_ssh::source`
+### <a name="profile_hostbased_ssh--source"></a>`profile_hostbased_ssh::source`
 
 Configure a source/client to use hostbased authentication.
 
@@ -142,31 +137,31 @@ include profile_hostbased_ssh::source
 
 The following parameters are available in the `profile_hostbased_ssh::source` class:
 
-* [`global_custom_config`](#global_custom_config)
-* [`host_match_custom_config`](#host_match_custom_config)
-* [`host_match_pattern`](#host_match_pattern)
+* [`global_custom_config`](#-profile_hostbased_ssh--source--global_custom_config)
+* [`host_match_custom_config`](#-profile_hostbased_ssh--source--host_match_custom_config)
+* [`host_match_pattern`](#-profile_hostbased_ssh--source--host_match_pattern)
 
-##### <a name="global_custom_config"></a>`global_custom_config`
+##### <a name="-profile_hostbased_ssh--source--global_custom_config"></a>`global_custom_config`
 
 Data type: `Hash`
 
 Additional ssh_conf params (suitable for ssh_config global config...
 although it will end up in a "Host *" block anyway)
 
-##### <a name="host_match_custom_config"></a>`host_match_custom_config`
+##### <a name="-profile_hostbased_ssh--source--host_match_custom_config"></a>`host_match_custom_config`
 
 Data type: `Hash`
 
 Additional ssh_conf params (suitable for ssh_config match block)
 
-##### <a name="host_match_pattern"></a>`host_match_pattern`
+##### <a name="-profile_hostbased_ssh--source--host_match_pattern"></a>`host_match_pattern`
 
 Data type: `String`
 
 Host pattern to match with 'Host' block. Use an empty string if
 this should be omitted for some reason.
 
-### <a name="profile_hostbased_sshtarget"></a>`profile_hostbased_ssh::target`
+### <a name="profile_hostbased_ssh--target"></a>`profile_hostbased_ssh::target`
 
 Configure a target/server to accept hostbased authentication.
 
@@ -185,14 +180,14 @@ include profile_hostbased_ssh::target
 
 The following parameters are available in the `profile_hostbased_ssh::target` class:
 
-* [`groups`](#groups)
-* [`sshd_custom_config`](#sshd_custom_config)
-* [`sshd_match_nodelist`](#sshd_match_nodelist)
-* [`users`](#users)
+* [`groups`](#-profile_hostbased_ssh--target--groups)
+* [`sshd_custom_config`](#-profile_hostbased_ssh--target--sshd_custom_config)
+* [`sshd_match_nodelist`](#-profile_hostbased_ssh--target--sshd_match_nodelist)
+* [`users`](#-profile_hostbased_ssh--target--users)
 
-##### <a name="groups"></a>`groups`
+##### <a name="-profile_hostbased_ssh--target--groups"></a>`groups`
 
-Data type: `Array[ String ]`
+Data type: `Array[String]`
 
 One or more LDAP / UNIX groups that are allowed to login from
 any of the nodes in sshd_match_nodelist.
@@ -200,23 +195,23 @@ any of the nodes in sshd_match_nodelist.
 Note: This is set to [] by default, but one of `groups` or
       `users` must be set.
 
-##### <a name="sshd_custom_config"></a>`sshd_custom_config`
+##### <a name="-profile_hostbased_ssh--target--sshd_custom_config"></a>`sshd_custom_config`
 
 Data type: `Hash`
 
 Additional sshd_conf params (suitable for sshd_config match block)
 
-##### <a name="sshd_match_nodelist"></a>`sshd_match_nodelist`
+##### <a name="-profile_hostbased_ssh--target--sshd_match_nodelist"></a>`sshd_match_nodelist`
 
-Data type: `Array[ String, 1 ]`
+Data type: `Array[String, 1]`
 
 List of hostnames / IPs / CIDRs from which to accept hostbased authentication.
 
 Note: must contain at least 1 item
 
-##### <a name="users"></a>`users`
+##### <a name="-profile_hostbased_ssh--target--users"></a>`users`
 
-Data type: `Array[ String ]`
+Data type: `Array[String]`
 
 One or more LDAP / UNIX users that are allowed to login from
 any of the nodes in sshd_match_nodelist.

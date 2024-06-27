@@ -24,12 +24,12 @@ profile_hostbased_ssh::pam_slurm_adopt::pam_config:
     module: "pam_systemd.so"
     service: "password-auth"
     type: "session"
-    require: "Class[Pam_access::Pam::Suse]"
+    require: "Class[Pam_access::Pam::Authselect]"
   'remove pam_systemd.so from system-auth':
     ensure: "absent"
     module: "pam_systemd.so"
     service: "system-auth"
     type: "session"
-    require: "Class[Pam_access::Pam::Suse]"
+    require: "Class[Pam_access::Pam::Authselect]"
 profile_hostbased_ssh::pam_slurm_adopt::services_to_mask:
   - "systemd-logind.service"

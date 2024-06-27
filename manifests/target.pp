@@ -30,20 +30,18 @@
 # @example
 #   include profile_hostbased_ssh::target
 class profile_hostbased_ssh::target (
-  Array[ String, 1 ] $sshd_match_nodelist,
+  Array[String, 1] $sshd_match_nodelist,
   Hash               $sshd_custom_config,
-  Array[ String ]    $groups,
-  Array[ String ]    $users,
+  Array[String]    $groups,
+  Array[String]    $users,
 ) {
+  include profile_hostbased_ssh::known_hosts
+  include profile_hostbased_ssh::shosts_equiv
 
-  include ::profile_hostbased_ssh::known_hosts
-  include ::profile_hostbased_ssh::shosts_equiv
-
-  ::sshd::allow_from{ 'sshd allow hostbased ssh':
+  ::sshd::allow_from { 'sshd allow hostbased ssh':
     hostlist                => $sshd_match_nodelist,
     users                   => $users,
     groups                  => $groups,
     additional_match_params => $sshd_custom_config,
   }
-
 }

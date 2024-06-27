@@ -30,7 +30,6 @@ class profile_hostbased_ssh::known_hosts (
   Hash   $hosts_data,
   String $ssh_known_hosts_file,
 ) {
-
   # ensure proper perms on known hosts file
   file { $ssh_known_hosts_file :
     ensure => file,
@@ -48,7 +47,7 @@ class profile_hostbased_ssh::known_hosts (
     # create individual sshkey resources from each host
     $hosts.each | $host, $ip| {
       $fqdn    = "${host}.${domain}"
-      $aliases = [ $fqdn, $ip ]
+      $aliases = [$fqdn, $ip]
       sshkey { $host :
         ensure       => present,
         host_aliases => $aliases,
@@ -58,5 +57,4 @@ class profile_hostbased_ssh::known_hosts (
       }
     }
   }
-
 }

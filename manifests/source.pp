@@ -22,8 +22,7 @@ class profile_hostbased_ssh::source (
   Hash   $host_match_custom_config,
   String $host_match_pattern,
 ) {
-
-  include ::profile_hostbased_ssh::known_hosts
+  include profile_hostbased_ssh::known_hosts
 
   $config_defaults = {
     'ensure' => 'present',
@@ -34,15 +33,14 @@ class profile_hostbased_ssh::source (
     ssh_config {
       $key :
         value => $val,
-      ;
+        ;
       default:
         * => $config_defaults,
-      ;
+        ;
     }
   }
 
   if ! empty($host_match_pattern) {
-
     $config_match_defaults = $config_defaults + { 'host' => $host_match_pattern }
 
     # add host match block with custom config to ssh_config
@@ -50,12 +48,11 @@ class profile_hostbased_ssh::source (
       ssh_config {
         $key :
           value => $val,
-        ;
+          ;
         default:
           * => $config_match_defaults,
-        ;
+          ;
       }
     }
   }
-
 }

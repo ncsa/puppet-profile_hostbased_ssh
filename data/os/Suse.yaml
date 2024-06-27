@@ -1,5 +1,4 @@
 ---
-
 profile_hostbased_ssh::pam_slurm_adopt::pam_config:
 # exempt root from pam_slurm_adopt
   'add account pam_succeed_if.so for privileged accounts to sshd':

@@ -9,7 +9,7 @@
 #   https://bugs.schedmd.com/show_bug.cgi?id=3912
 #   https://bugs.schedmd.com/show_bug.cgi?id=5920
 #
-# @param pam_configs
+# @param pam_config
 #   Hash of data to pass to augeasproviders_pam.
 #
 # @param services_to_mask

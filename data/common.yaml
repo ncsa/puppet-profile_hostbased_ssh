@@ -1,5 +1,6 @@
 ---
 
+profile_hostbased_ssh::known_hosts::hosts_data: {}
 profile_hostbased_ssh::known_hosts::ssh_known_hosts_file: "/etc/ssh/ssh_known_hosts"
 
 profile_hostbased_ssh::shosts_equiv::shosts_equiv_file: "/etc/ssh/shosts.equiv"

@@ -48,6 +48,7 @@ Hash of the form:
     hosts:
       ...
   ...
+Leave set to {} to NOT manage shosts.equiv and ssh_known_hosts.
 
 ##### <a name="-profile_hostbased_ssh--known_hosts--ssh_known_hosts_file"></a>`ssh_known_hosts_file`
 
@@ -78,11 +79,12 @@ include profile_hostbased_ssh::pam_slurm_adopt
 
 The following parameters are available in the `profile_hostbased_ssh::pam_slurm_adopt` class:
 
-* [`pam_configs`](#-profile_hostbased_ssh--pam_slurm_adopt--pam_configs)
-* [`services_to_mask`](#-profile_hostbased_ssh--pam_slurm_adopt--services_to_mask)
 * [`pam_config`](#-profile_hostbased_ssh--pam_slurm_adopt--pam_config)
+* [`services_to_mask`](#-profile_hostbased_ssh--pam_slurm_adopt--services_to_mask)
 
-##### <a name="-profile_hostbased_ssh--pam_slurm_adopt--pam_configs"></a>`pam_configs`
+##### <a name="-profile_hostbased_ssh--pam_slurm_adopt--pam_config"></a>`pam_config`
+
+Data type: `Hash`
 
 Hash of data to pass to augeasproviders_pam.
 
@@ -91,12 +93,6 @@ Hash of data to pass to augeasproviders_pam.
 Data type: `Array`
 
 Array of services to stop and mask
-
-##### <a name="-profile_hostbased_ssh--pam_slurm_adopt--pam_config"></a>`pam_config`
-
-Data type: `Hash`
-
-
 
 ### <a name="profile_hostbased_ssh--shosts_equiv"></a>`profile_hostbased_ssh::shosts_equiv`
 
@@ -122,7 +118,7 @@ The following parameters are available in the `profile_hostbased_ssh::shosts_equ
 
 Data type: `String`
 
-
+Path to shosts.equiv file.
 
 ### <a name="profile_hostbased_ssh--source"></a>`profile_hostbased_ssh::source`
 

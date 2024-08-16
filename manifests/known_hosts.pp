@@ -22,6 +22,7 @@
 #       hosts:
 #         ...
 #     ...
+#   Leave set to {} to NOT manage shosts.equiv and ssh_known_hosts.
 #
 # @param ssh_known_hosts_file
 #   Location of the ssh_known_hosts file (usually /etc/ssh/ssh_known_hosts).
@@ -30,30 +31,32 @@ class profile_hostbased_ssh::known_hosts (
   Hash   $hosts_data,
   String $ssh_known_hosts_file,
 ) {
-  # ensure proper perms on known hosts file
-  file { $ssh_known_hosts_file :
-    ensure => file,
-    group  => 'root',
-    mode   => '0644',
-    owner  => 'root',
-  }
+  if ! empty($profile_hostbased_ssh::known_hosts::hosts_data) {
+    # ensure proper perms on known hosts file
+    file { $ssh_known_hosts_file :
+      ensure => file,
+      group  => 'root',
+      mode   => '0644',
+      owner  => 'root',
+    }
 
-  # create sets of entries in /etc/ssh/ssh_known_hosts from each host set
-  $hosts_data.each | $host_set, $data | {
-    $domain   = $data[domain]
-    $key_type = $data[key_type]
-    $key      = $data[key]
-    $hosts    = $data[hosts]
-    # create individual sshkey resources from each host
-    $hosts.each | $host, $ip| {
-      $fqdn    = "${host}.${domain}"
-      $aliases = [$fqdn, $ip]
-      sshkey { $host :
-        ensure       => present,
-        host_aliases => $aliases,
-        key          => $key,
-        target       => $ssh_known_hosts_file,
-        type         => $key_type,
+    # create sets of entries in /etc/ssh/ssh_known_hosts from each host set
+    $hosts_data.each | $host_set, $data | {
+      $domain   = $data[domain]
+      $key_type = $data[key_type]
+      $key      = $data[key]
+      $hosts    = $data[hosts]
+      # create individual sshkey resources from each host
+      $hosts.each | $host, $ip| {
+        $fqdn    = "${host}.${domain}"
+        $aliases = [$fqdn, $ip]
+        sshkey { $host :
+          ensure       => present,
+          host_aliases => $aliases,
+          key          => $key,
+          target       => $ssh_known_hosts_file,
+          type         => $key_type,
+        }
       }
     }
   }

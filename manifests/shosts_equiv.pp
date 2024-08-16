@@ -9,7 +9,6 @@
 class profile_hostbased_ssh::shosts_equiv (
   String $shosts_equiv_file,
 ) {
-
   # ensure proper perms on shosts.equiv file
   file { $shosts_equiv_file :
     ensure  => file,
@@ -18,5 +17,4 @@ class profile_hostbased_ssh::shosts_equiv (
     mode    => '0644',
     owner   => 'root',
   }
-
 }

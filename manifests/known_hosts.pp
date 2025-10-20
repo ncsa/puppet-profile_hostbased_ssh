@@ -48,8 +48,10 @@ class profile_hostbased_ssh::known_hosts (
       $hosts    = $data[hosts]
       # create individual sshkey resources from each host
       $hosts.each | $host, $ip| {
-        $fqdn    = "${host}.${domain}"
-        $aliases = [$fqdn, $ip]
+        $aliases = $domain ? {
+          undef   => [$ip],
+          default => [$ip, "${host}.${domain}"]
+        }
         sshkey { $host :
           ensure       => present,
           host_aliases => $aliases,

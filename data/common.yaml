@@ -16,6 +16,7 @@ profile_hostbased_ssh::source::ssh_match_config:
   NoHostAuthenticationForLocalhost: "yes"
   StrictHostKeyChecking: "yes"
   UserKnownHostsFile: "/dev/null"
+  PreferredAuthentications: "hostbased"
 
 profile_hostbased_ssh::target::sshd_global_config:
   IgnoreUserKnownHosts: 'yes'

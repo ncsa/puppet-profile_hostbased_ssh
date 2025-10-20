@@ -35,6 +35,7 @@ class profile_hostbased_ssh::target (
   Hash[String, String] $sshd_global_config,
   Array[String]        $groups,
   Array[String]        $users,
+  Boolean              $sshd_allow_ips = $sshd_global_config['UseDNS'] != 'yes',
 ) {
   include profile_hostbased_ssh::known_hosts
   include profile_hostbased_ssh::shosts_equiv
